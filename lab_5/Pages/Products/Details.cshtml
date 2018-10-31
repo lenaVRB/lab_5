@@ -1,0 +1,55 @@
+﻿@page "{id:int?}"
+@model lab_5.Pages.Products.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Brand)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.Brand)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Model)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.Model)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.DateOfCreation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.DateOfCreation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Photo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.Photo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Product.ProductID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
