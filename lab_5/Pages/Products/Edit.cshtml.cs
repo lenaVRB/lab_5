@@ -29,46 +29,34 @@ namespace lab_5.Pages.Products
                 return NotFound();
             }
 
-            Product = await _context.Product.FirstOrDefaultAsync(m => m.ProductID == id);
+			Product = await _context.Product.FindAsync(id);
 
-            if (Product == null)
+			if (Product == null)
             {
                 return NotFound();
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Product).State = EntityState.Modified;
+			var productToUpdate = await _context.Product.FindAsync(id);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(Product.ProductID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+			if (await TryUpdateModelAsync<Product>(
+				productToUpdate,
+				"product",   // Prefix for form value.
+				s => s.Model, s => s.Price, s => s.Brand, s => s.DateOfCreation, s => s.Photo, s => s.Description))
+			{
+				await _context.SaveChangesAsync();
+				return RedirectToPage("./Index");
+			}
 
-            return RedirectToPage("./Index");
-        }
-
-        private bool ProductExists(int id)
-        {
-            return _context.Product.Any(e => e.ProductID == id);
-        }
+			return Page();
+		}
     }
 }

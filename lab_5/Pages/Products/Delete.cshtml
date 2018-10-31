@@ -1,4 +1,4 @@
-﻿@page "{id:int?}"
+﻿@page "{id:int}"
 @model lab_5.Pages.Products.DeleteModel
 
 @{
@@ -6,6 +6,8 @@
 }
 
 <h2>Delete</h2>
+
+<p class="text-danger">@Model.ErrorMessage</p>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>

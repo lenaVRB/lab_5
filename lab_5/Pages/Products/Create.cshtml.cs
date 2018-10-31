@@ -33,10 +33,19 @@ namespace lab_5.Pages.Products
                 return Page();
             }
 
-            _context.Product.Add(Product);
-            await _context.SaveChangesAsync();
+			var emptyProduct = new Product();
 
-            return RedirectToPage("./Index");
-        }
+			if (await TryUpdateModelAsync<Product>(
+				emptyProduct,
+				"product",   // Prefix for form value.
+				s => s.Model, s => s.Price, s => s.Brand, s=>s.DateOfCreation, s=>s.Photo, s=>s.Description))
+			{
+				_context.Product.Add(emptyProduct);
+				await _context.SaveChangesAsync();
+				return RedirectToPage("./Index");
+			}
+
+			return null;
+		}
     }
 }

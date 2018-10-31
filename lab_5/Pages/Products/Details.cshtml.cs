@@ -27,7 +27,9 @@ namespace lab_5.Pages.Products
                 return NotFound();
             }
 
-            Product = await _context.Product.FirstOrDefaultAsync(m => m.ProductID == id);
+            Product = await _context.Product
+				.Include(p=>p.Category)
+				.FirstOrDefaultAsync(m => m.ProductID == id);
 
             if (Product == null)
             {

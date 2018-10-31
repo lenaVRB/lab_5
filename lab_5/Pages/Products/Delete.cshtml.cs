@@ -20,21 +20,27 @@ namespace lab_5.Pages.Products
 
         [BindProperty]
         public Product Product { get; set; }
+		public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+		public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Product = await _context.Product.FirstOrDefaultAsync(m => m.ProductID == id);
+            Product = await _context.Product.AsNoTracking().FirstOrDefaultAsync(m => m.ProductID == id);
 
             if (Product == null)
             {
                 return NotFound();
             }
-            return Page();
+
+			if (saveChangesError.GetValueOrDefault())
+			{
+				ErrorMessage = "Delete failed. Try again";
+			}
+			return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
@@ -44,15 +50,25 @@ namespace lab_5.Pages.Products
                 return NotFound();
             }
 
-            Product = await _context.Product.FindAsync(id);
+            var product = await _context.Product.AsNoTracking().FirstOrDefaultAsync(p=>p.ProductID==id);
 
-            if (Product != null)
-            {
-                _context.Product.Remove(Product);
-                await _context.SaveChangesAsync();
-            }
+			if (product == null)
+			{
+				return NotFound();
+			}
 
-            return RedirectToPage("./Index");
-        }
+			try
+			{
+				_context.Product.Remove(product);
+				await _context.SaveChangesAsync();
+				return RedirectToPage("./Index");
+			}
+			catch (DbUpdateException  ex )
+			{
+				//Log the error 
+				return RedirectToAction("./Delete",
+									 new { id, saveChangesError = true });
+			}
+		}
     }
 }
