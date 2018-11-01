@@ -38,7 +38,7 @@ namespace lab_5.Pages.Products
 			if (await TryUpdateModelAsync<Product>(
 				emptyProduct,
 				"product",   // Prefix for form value.
-				s => s.Model, s => s.Price, s => s.Brand, s=>s.DateOfCreation, s=>s.Photo, s=>s.Description))
+				s => s.Model, s => s.Price, s => s.Brand, s=>s.DateOfCreation, s=>s.Description))
 			{
 				_context.Product.Add(emptyProduct);
 				await _context.SaveChangesAsync();
