@@ -12,9 +12,9 @@ namespace lab_5.Pages.Products
 {
     public class EditModel : CategoryNamePageModel
     {
-        private readonly lab_5.Models.ProductContext _context;
+        private readonly ProductContext _context;
 
-        public EditModel(lab_5.Models.ProductContext context)
+        public EditModel(ProductContext context)
         {
             _context = context;
         }
