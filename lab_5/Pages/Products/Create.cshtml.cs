@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace lab_5.Pages.Products
 {
-    public class CreateModel : PageModel
+    public class CreateModel : CategoryNamePageModel
     {
         private readonly lab_5.Models.ProductContext _context;
 
@@ -28,19 +28,6 @@ namespace lab_5.Pages.Products
 
         [BindProperty]
         public Product Product { get; set; }
-
-		public SelectList CategoryList { get; set; }
-
-		public void PopulateCategoriesDropDownList(ProductContext _context,
-			object selectedCategory = null)
-		{
-			var categoriesQuery = from c in _context.Category
-								   orderby c.CategoryName 
-								   select c;
-
-			CategoryList = new SelectList(categoriesQuery.AsNoTracking(),
-						"CategoryID", "CategoryName", selectedCategory);
-		}
 
 		public async Task<IActionResult> OnPostAsync()
         {
@@ -61,6 +48,7 @@ namespace lab_5.Pages.Products
 				await _context.SaveChangesAsync();
 				return RedirectToPage("./Index");
 			}
+
 			PopulateCategoriesDropDownList(_context, emptyProduct.CategoryID);
 			return Page();
 		}

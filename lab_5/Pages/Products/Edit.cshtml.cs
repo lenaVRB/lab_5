@@ -10,7 +10,7 @@ using lab_5.Models;
 
 namespace lab_5.Pages.Products
 {
-    public class EditModel : PageModel
+    public class EditModel : CategoryNamePageModel
     {
         private readonly lab_5.Models.ProductContext _context;
 
@@ -29,12 +29,13 @@ namespace lab_5.Pages.Products
                 return NotFound();
             }
 
-			Product = await _context.Product.FindAsync(id);
+			Product = await _context.Product.Include(p=>p.Category).FirstOrDefaultAsync(p=>p.ProductID==id);
 
 			if (Product == null)
             {
                 return NotFound();
             }
+			PopulateCategoriesDropDownList(_context, Product.CategoryID);
             return Page();
         }
 
@@ -50,12 +51,13 @@ namespace lab_5.Pages.Products
 			if (await TryUpdateModelAsync<Product>(
 				productToUpdate,
 				"product",   // Prefix for form value.
-				s => s.Model, s => s.Price, s => s.Brand, s => s.DateOfCreation, s => s.Photo, s => s.Description))
+				s => s.CategoryID, s => s.Model, s => s.Price, s => s.Brand, s => s.DateOfCreation, s => s.Photo, s => s.Description))
 			{
 				await _context.SaveChangesAsync();
 				return RedirectToPage("./Index");
 			}
 
+			PopulateCategoriesDropDownList(_context, productToUpdate.CategoryID);
 			return Page();
 		}
     }

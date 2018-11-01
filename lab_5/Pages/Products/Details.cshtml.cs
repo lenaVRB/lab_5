@@ -28,7 +28,7 @@ namespace lab_5.Pages.Products
             }
 
             Product = await _context.Product
-				.Include(p=>p.Category)
+				.Include(p=>p.Category).AsNoTracking().
 				.FirstOrDefaultAsync(m => m.ProductID == id);
 
             if (Product == null)
