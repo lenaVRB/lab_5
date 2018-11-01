@@ -48,7 +48,9 @@ namespace lab_5.Pages.Products
 			if (!String.IsNullOrEmpty(searchString))
 			{
 				productIQ = productIQ.Where(s => s.Brand.Contains(searchString)
-									   || s.Model.Contains(searchString)||s.Description.Contains(searchString));
+									   || s.Model.Contains(searchString)
+									   ||s.Description.Contains(searchString) 
+									   ||s.Category.CategoryName.Contains(searchString));
 			}
 
 			switch (sortOrder)
@@ -66,7 +68,7 @@ namespace lab_5.Pages.Products
 					productIQ = productIQ.OrderBy(s => s.Brand);
 					break;
 			}
-			int pageSize = 3;
+			int pageSize = 5;
 			Product = await PaginatedList<Product>.CreateAsync(
 				productIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
 

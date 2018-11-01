@@ -39,14 +39,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Product[0].Price)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].Description)
-            </th>
+
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort"
                    asp-route-currentFilter="@Model.CurrentFilter">
                     @Html.DisplayNameFor(model => model.Product[0].DateOfCreation)
                 </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Description)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Product[0].Photo)

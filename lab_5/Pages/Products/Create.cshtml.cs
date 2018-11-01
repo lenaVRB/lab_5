@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using lab_5.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace lab_5.Pages.Products
 {
@@ -20,13 +21,28 @@ namespace lab_5.Pages.Products
 
         public IActionResult OnGet()
         {
-            return Page();
+			PopulateCategoriesDropDownList(_context);
+
+			return Page();
         }
 
         [BindProperty]
         public Product Product { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+		public SelectList CategoryList { get; set; }
+
+		public void PopulateCategoriesDropDownList(ProductContext _context,
+			object selectedCategory = null)
+		{
+			var categoriesQuery = from c in _context.Category
+								   orderby c.CategoryName 
+								   select c;
+
+			CategoryList = new SelectList(categoriesQuery.AsNoTracking(),
+						"CategoryID", "CategoryName", selectedCategory);
+		}
+
+		public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
@@ -38,14 +54,15 @@ namespace lab_5.Pages.Products
 			if (await TryUpdateModelAsync<Product>(
 				emptyProduct,
 				"product",   // Prefix for form value.
-				s => s.Model, s => s.Price, s => s.Brand, s=>s.DateOfCreation, s=>s.Description))
+				 s=>s.CategoryID, s => s.Model, s => s.Price, s => s.Brand, s=>s.DateOfCreation, s=>s.Description))
 			{
+
 				_context.Product.Add(emptyProduct);
 				await _context.SaveChangesAsync();
 				return RedirectToPage("./Index");
 			}
-
-			return null;
+			PopulateCategoriesDropDownList(_context, emptyProduct.CategoryID);
+			return Page();
 		}
     }
 }
