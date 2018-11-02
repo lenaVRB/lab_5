@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<products>
+	<product>
+		<id>6</id>
+		<brand>Huawei</brand>
+		<model>P7</model>
+		<price>800</price>
+		<description>Something</description>
+	</product>
+	<product>
+		<id>7</id>
+		<brand>Xiaomi</brand>
+		<model>P9</model>
+		<price>800</price>
+		<description>Something</description>
+	</product>
+	<product>
+		<id>8</id>
+		<brand>Apple</brand>
+		<model>IPhone S</model>
+		<price>1000</price>
+		<description>Something</description>
+	</product>
+</products>  

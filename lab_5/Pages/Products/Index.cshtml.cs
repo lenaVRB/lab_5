@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using lab_5.Models;
 using lab_5.Helpers;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Xml.Linq;
 
 namespace lab_5.Pages.Products
 {
@@ -25,8 +28,10 @@ namespace lab_5.Pages.Products
 		public string CurrentSort { get; set; }
 
 		public PaginatedList<Product> Product { get;set; }
+		[BindProperty]
+		public IFormFile Upload { get; set; }
 
-        public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex)
+		public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex)
         {
 			CurrentSort = sortOrder;
 			BrandSort = String.IsNullOrEmpty(sortOrder) ? "brand_desc" : "";
@@ -71,8 +76,42 @@ namespace lab_5.Pages.Products
 			int pageSize = 5;
 			Product = await PaginatedList<Product>.CreateAsync(
 				productIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
-
-			
+		
 		}
-    }
+
+		public async Task OnPostAsync()
+		{
+			var file = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/xmls", Upload.FileName);
+			using (var fileStream = new FileStream(file, FileMode.Create))
+			{
+				await Upload.CopyToAsync(fileStream);
+			}
+			ProcessImport(file);
+		}
+
+		private void ProcessImport(string path)
+		{
+			XDocument xDocument = XDocument.Load(path);
+			List<Product> products = xDocument.Descendants("product").Select(p =>
+				new Product()
+				{
+					ProductID = Convert.ToInt32(p.Element("id").Value),
+					Model = p.Element("model").Value,
+					Brand = p.Element("brand").Value,
+					Price = Convert.ToInt32(p.Element("price").Value),
+					Description = p.Element("description").Value
+				}).ToList();
+			foreach (var product in products)
+			{
+				var newProduct = _context.Product.SingleOrDefault(p => p.ProductID.Equals(product.ProductID));
+				if (newProduct == null)
+				{
+					_context.Product.Add(product);
+				}
+				
+				_context.SaveChanges();
+			}
+		}
+
+	}
 }
