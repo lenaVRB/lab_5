@@ -27,7 +27,8 @@ namespace lab_5.Pages.Products
 		public string CurrentFilter { get; set; }
 		public string CurrentSort { get; set; }
 
-		public PaginatedList<Product> Product { get;set; }
+		public PaginatedList<Product> Product { get; set; }
+
 		[BindProperty]
 		public IFormFile Upload { get; set; }
 
@@ -81,12 +82,18 @@ namespace lab_5.Pages.Products
 
 		public async Task OnPostAsync()
 		{
-			var file = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/xmls", Upload.FileName);
-			using (var fileStream = new FileStream(file, FileMode.Create))
+			try
 			{
-				await Upload.CopyToAsync(fileStream);
+				var file = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/xmls", Upload.FileName);
+				using (var fileStream = new FileStream(file, FileMode.Create))
+				{
+					await Upload.CopyToAsync(fileStream);
+				}
 				ProcessImport(file);
-			}		
+			}catch(Exception ex)
+			{
+			}
+			
 		}
 
 		private void ProcessImport(string path)
@@ -105,11 +112,19 @@ namespace lab_5.Pages.Products
 			foreach (var product in products)
 			{
 				var newProduct = _context.Product.SingleOrDefault(p => p.ProductID.Equals(product.ProductID));
-				if (newProduct == null)
+				if (newProduct != null)
+				{
+					newProduct.Brand = product.Brand;
+					newProduct.CategoryID = product.CategoryID;
+					newProduct.Description = product.Description;
+					newProduct.Model = product.Model;
+					newProduct.Price = product.Price;
+					_context.Product.Add(newProduct);
+				}
+				else
 				{
 					_context.Product.Add(product);
-				}
-				
+				}			
 				_context.SaveChanges();
 			}
 
