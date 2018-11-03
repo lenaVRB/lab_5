@@ -21,10 +21,17 @@
         </p>
     </div>
 </form>
-<form asp-page="./Index" method="post" enctype="multipart/form-data">
-    <input type="file" asp-for="Upload"/>
-    <input type="submit" value="Upload"/>
-</form>
+<div style="display:inline-flex">
+    <form asp-page="./Index" asp-page-handler="upload" method="post" enctype="multipart/form-data">
+        <div style="display:inline-flex">
+            <input type="file" asp-for="Upload"/>
+            <input type="submit" value="Upload"/>
+        </div>
+    </form>
+    <form asp-page="./Index" asp-page-handler="export" method="post" enctype="multipart/form-data">
+        <input type="submit" value="Export to XML" />
+    </form>
+ </div>
 
 <table class="table">
     <thead>
@@ -110,3 +117,5 @@
    class="btn btn-default @nextDisabled">
     Next
 </a>
+
+

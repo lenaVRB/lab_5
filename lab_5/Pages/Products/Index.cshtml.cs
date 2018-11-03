@@ -80,7 +80,7 @@ namespace lab_5.Pages.Products
 		
 		}
 
-		public async Task OnPostAsync()
+		public async Task OnPostUploadAsync(int? pageIndex)
 		{
 			try
 			{
@@ -93,7 +93,14 @@ namespace lab_5.Pages.Products
 			}catch(Exception ex)
 			{
 			}
-			
+
+
+			IQueryable<Product> productIQ = from p in _context.Product.Include(p => p.Category)
+											select p;
+			int pageSize = 5;
+			Product = await PaginatedList<Product>.CreateAsync(
+				productIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
+
 		}
 
 		private void ProcessImport(string path)
@@ -128,7 +135,13 @@ namespace lab_5.Pages.Products
 				_context.SaveChanges();
 			}
 
+
 		}
 
+
+		private void ProcessExport()
+		{
+			
+		}
 	}
 }
