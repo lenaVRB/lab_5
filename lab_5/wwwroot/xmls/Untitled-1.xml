@@ -2,6 +2,7 @@
 <products>
 	<product>
 		<id>6</id>
+		<categoryid>1</categoryid>
 		<brand>Huawei</brand>
 		<model>P7</model>
 		<price>800</price>
@@ -9,6 +10,7 @@
 	</product>
 	<product>
 		<id>7</id>
+		<categoryid>1</categoryid>
 		<brand>Xiaomi</brand>
 		<model>P9</model>
 		<price>800</price>
@@ -16,6 +18,7 @@
 	</product>
 	<product>
 		<id>8</id>
+		<categoryid>1</categoryid>
 		<brand>Apple</brand>
 		<model>IPhone S</model>
 		<price>1000</price>

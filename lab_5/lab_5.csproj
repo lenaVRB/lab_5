@@ -6,6 +6,9 @@
 
   <ItemGroup>
     <Compile Remove="Migrations\20181102192915_ProductIDNoneGenerated.cs" />
+    <Compile Remove="Migrations\ChangeIdentityOperation.cs" />
+    <Compile Remove="Migrations\MigrationExtensions.cs" />
+    <Compile Remove="Migrations\MySqlServerMigrationSqlGenerator.cs" />
   </ItemGroup>
 
   <ItemGroup>

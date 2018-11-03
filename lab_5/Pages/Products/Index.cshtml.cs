@@ -85,8 +85,8 @@ namespace lab_5.Pages.Products
 			using (var fileStream = new FileStream(file, FileMode.Create))
 			{
 				await Upload.CopyToAsync(fileStream);
-			}
-			ProcessImport(file);
+				ProcessImport(file);
+			}		
 		}
 
 		private void ProcessImport(string path)
@@ -96,6 +96,7 @@ namespace lab_5.Pages.Products
 				new Product()
 				{
 					ProductID = Convert.ToInt32(p.Element("id").Value),
+					CategoryID = Convert.ToInt32(p.Element("categoryid").Value),
 					Model = p.Element("model").Value,
 					Brand = p.Element("brand").Value,
 					Price = Convert.ToInt32(p.Element("price").Value),
@@ -111,6 +112,7 @@ namespace lab_5.Pages.Products
 				
 				_context.SaveChanges();
 			}
+
 		}
 
 	}
