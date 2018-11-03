@@ -28,6 +28,7 @@ namespace lab_5.Pages.Products
 		public string CurrentSort { get; set; }
 
 		public PaginatedList<Product> Product { get; set; }
+		public HttpResponse Response { get; set; }
 
 		[BindProperty]
 		public IFormFile Upload { get; set; }
@@ -94,6 +95,34 @@ namespace lab_5.Pages.Products
 			{
 			}
 
+
+			IQueryable<Product> productIQ = from p in _context.Product.Include(p => p.Category)
+											select p;
+			int pageSize = 5;
+			Product = await PaginatedList<Product>.CreateAsync(
+				productIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
+
+		}
+
+		public async Task OnPostExportAsync(int? pageIndex)
+		{
+			List<Product> productList = _context.Product.ToList();
+			if (productList.Count > 0)
+			{
+				var xElement = new XElement("products",
+					from p in productList
+					select new XElement("product",
+						new XElement("id", p.ProductID),
+						new XElement("categoryid",p.CategoryID),
+						new XElement("brand", p.Brand),
+						new XElement("model", p.Model),
+						new XElement("price", p.Price),
+						new XElement("description", p.Description)		
+					));
+				Response.WriteAsync()
+				
+
+			}
 
 			IQueryable<Product> productIQ = from p in _context.Product.Include(p => p.Category)
 											select p;
