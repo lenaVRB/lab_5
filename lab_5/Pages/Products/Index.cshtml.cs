@@ -11,10 +11,12 @@ using lab_5.Helpers;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace lab_5.Pages.Products
 {
-    public class IndexModel : PageModel
+	[Authorize]
+	public class IndexModel : PageModel
     {
         private readonly lab_5.Models.ProductContext _context;
 		private IHostingEnvironment _env;

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using lab_5.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace lab_5.Pages.Products
 {
+	[Authorize]
     public class CreateModel : CategoryNamePageModel
     {
         private readonly lab_5.Models.ProductContext _context;

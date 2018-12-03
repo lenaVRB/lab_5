@@ -9,7 +9,7 @@ using lab_5.Models;
 
 namespace lab_5.Pages.Products
 {
-    public class DetailsModel : PageModel
+	public class DetailsModel : PageModel
     {
         private readonly lab_5.Models.ProductContext _context;
 

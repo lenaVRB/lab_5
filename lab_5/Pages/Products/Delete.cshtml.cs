@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using lab_5.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace lab_5.Pages.Products
 {
+	[Authorize]
     public class DeleteModel : PageModel
     {
         private readonly lab_5.Models.ProductContext _context;
