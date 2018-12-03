@@ -42,11 +42,18 @@
             @Html.DisplayFor(model => model.Product.DateOfCreation)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.Product.Photo)
+        </dt>
+        <dd>
+            <img src="@Url.Content(Model.Product.Photo)" alt="Image" style="height:200px;width:200px;" />
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Product.Description)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Product.Description)
         </dd>
+
 
     </dl>
 </div>

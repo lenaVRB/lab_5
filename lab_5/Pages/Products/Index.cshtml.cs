@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
 using lab_5.Models;
 using lab_5.Helpers;
 using Microsoft.AspNetCore.Http;
@@ -16,10 +17,14 @@ namespace lab_5.Pages.Products
     public class IndexModel : PageModel
     {
         private readonly lab_5.Models.ProductContext _context;
+		private IHostingEnvironment _env;
+		private IHttpContextAccessor _httpContextAccessor;
 
-        public IndexModel(lab_5.Models.ProductContext context)
+		public IndexModel(lab_5.Models.ProductContext context, IHostingEnvironment env, IHttpContextAccessor httpContextAccessor)
         {
-            _context = context;
+			_env = env;
+			_httpContextAccessor = httpContextAccessor;
+			_context = context;
         }
 
 		public string BrandSort { get; set; }
@@ -28,7 +33,7 @@ namespace lab_5.Pages.Products
 		public string CurrentSort { get; set; }
 
 		public PaginatedList<Product> Product { get; set; }
-		public HttpResponse Response { get; set; }
+
 
 		[BindProperty]
 		public IFormFile Upload { get; set; }
@@ -106,6 +111,7 @@ namespace lab_5.Pages.Products
 
 		public async Task OnPostExportAsync(int? pageIndex)
 		{
+		
 			List<Product> productList = _context.Product.ToList();
 			if (productList.Count > 0)
 			{
@@ -113,17 +119,25 @@ namespace lab_5.Pages.Products
 					from p in productList
 					select new XElement("product",
 						new XElement("id", p.ProductID),
-						new XElement("categoryid",p.CategoryID),
+						new XElement("categoryid", p.CategoryID),
 						new XElement("brand", p.Brand),
 						new XElement("model", p.Model),
 						new XElement("price", p.Price),
-						new XElement("description", p.Description)		
+						new XElement("description", p.Description)
 					));
-				Response.WriteAsync()
-				
+				var contentRoot = _env.ContentRootPath;
+				string pathToDataFile = contentRoot + "\\Data\\Products.xml";
+				xElement.Save(pathToDataFile);
+
+				_httpContextAccessor.HttpContext.Response.Headers.Add("Content-Disposition", "attachment; filename=Products.xml");
+				_httpContextAccessor.HttpContext.Response.ContentType = "application/xml";
+				var objFile = new FileInfo(pathToDataFile);
+				var stream = objFile.OpenRead();
+				var objBytes = new byte[stream.Length];
+				stream.Read(objBytes, 0, (int)objFile.Length);
+				await _httpContextAccessor.HttpContext.Response.Body.WriteAsync(objBytes);
 
 			}
-
 			IQueryable<Product> productIQ = from p in _context.Product.Include(p => p.Category)
 											select p;
 			int pageSize = 5;
@@ -167,10 +181,5 @@ namespace lab_5.Pages.Products
 
 		}
 
-
-		private void ProcessExport()
-		{
-			
-		}
 	}
 }

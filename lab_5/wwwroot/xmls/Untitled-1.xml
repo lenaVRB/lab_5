@@ -1,26 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <products>
 	<product>
-		<id>12</id>
+		<id>50</id>
 		<categoryid>1</categoryid>
-		<brand>Samsung</brand>
-		<model>A9</model>
-		<price>800</price>
-		<description>Something</description>
-	</product>
-	<product>
-		<id>13</id>
-		<categoryid>1</categoryid>
-		<brand>Samsung</brand>
-		<model>A10</model>
-		<price>800</price>
-		<description>Something</description>
-	</product>
-	<product>
-		<id>14</id>
-		<categoryid>1</categoryid>
-		<brand>Nokia</brand>
-		<model>LUMIA</model>
+		<brand>Xiaomi</brand>
+		<model>S2</model>
 		<price>1000</price>
 		<description>Something</description>
 	</product>

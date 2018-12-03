@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using lab_5.Models;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace lab_5
 {
@@ -32,7 +33,7 @@ namespace lab_5
 				options.CheckConsentNeeded = context => true;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
-
+			services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

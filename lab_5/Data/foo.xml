@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<products>
+  <product>
+    <id>1</id>
+    <categoryid>1</categoryid>
+    <brand>Apple</brand>
+    <model>Iphone 7</model>
+    <price>1200</price>
+    <description />
+  </product>
+  <product>
+    <id>2</id>
+    <categoryid>1</categoryid>
+    <brand>Samsung</brand>
+    <model>S9</model>
+    <price>1000</price>
+    <description></description>
+  </product>
+  <product>
+    <id>3</id>
+    <categoryid>2</categoryid>
+    <brand>Canon</brand>
+    <model>EOS</model>
+    <price>900</price>
+    <description></description>
+  </product>
+  <product>
+    <id>6</id>
+    <categoryid>1</categoryid>
+    <brand>Huawei</brand>
+    <model>P7</model>
+    <price>800</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <id>7</id>
+    <categoryid>1</categoryid>
+    <brand>Xiaomi</brand>
+    <model>P9</model>
+    <price>800</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <id>8</id>
+    <categoryid>1</categoryid>
+    <brand>Apple</brand>
+    <model>IPhone S</model>
+    <price>1000</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <id>12</id>
+    <categoryid>1</categoryid>
+    <brand>Samsung</brand>
+    <model>A9</model>
+    <price>800</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <id>13</id>
+    <categoryid>1</categoryid>
+    <brand>Samsung</brand>
+    <model>A10</model>
+    <price>800</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <id>14</id>
+    <categoryid>1</categoryid>
+    <brand>Nokia</brand>
+    <model>LUMIA</model>
+    <price>1000</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <id>50</id>
+    <categoryid>1</categoryid>
+    <brand>Xiaomi</brand>
+    <model>S2</model>
+    <price>1000</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <id>1004</id>
+    <categoryid>2</categoryid>
+    <brand>nixon</brand>
+    <model>E 400</model>
+    <price>1200</price>
+    <description />
+  </product>
+</products>

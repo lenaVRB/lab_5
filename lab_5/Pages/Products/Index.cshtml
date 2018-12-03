@@ -3,8 +3,8 @@
 
 @{
     ViewData["Title"] = "Index";
-    Model.Response = HttpContext.Response;
-}
+
+}    
 
 <h2>Products</h2>
 
@@ -62,7 +62,7 @@
                 @Html.DisplayNameFor(model => model.Product[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Photo)
+                
             </th>
             <th></th>
         </tr>
@@ -70,31 +70,34 @@
     <tbody>
         @foreach (var item in Model.Product)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Brand)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Model)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateOfCreation)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.ProductID">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.ProductID">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.ProductID">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfCreation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <img src="@Url.Content(item.Photo)" alt="Image" style="height:200px;width:200px;" /> 
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ProductID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ProductID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ProductID">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
