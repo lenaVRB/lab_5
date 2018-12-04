@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <products>
 	<product>
-		<id>50</id>
 		<categoryid>1</categoryid>
-		<brand>Xiaomi</brand>
-		<model>S2</model>
-		<price>1000</price>
+		<brand>BESTBRAND</brand>
+		<model>A9</model>
+		<price>800</price>
 		<description>Something</description>
 	</product>
 </products>  

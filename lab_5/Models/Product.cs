@@ -9,7 +9,7 @@ namespace lab_5.Models
 {
 	public class Product
 	{
-		[DatabaseGenerated(DatabaseGeneratedOption.None)]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int ProductID { get; set; }
 		public Category Category { get; set; } 
 		public int CategoryID { get; set; }
@@ -21,7 +21,7 @@ namespace lab_5.Models
 		[DataType(DataType.Date)]
 		[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
 		[Display(Name = "Date of creation")]
-		public DateTime? DateOfCreation { get; set; }
+		public DateTime DateOfCreation { get; set; }
 		public string Photo { get; set; }
 	}
 }

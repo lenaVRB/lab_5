@@ -90,7 +90,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <img src="@Url.Content(item.Photo)" alt="Image" style="height:200px;width:200px;" /> 
+                <img src="@Url.Content(item.Photo)" alt="Image" /> 
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ProductID">Edit</a> |

@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <products>
   <product>
-    <id>1</id>
     <categoryid>1</categoryid>
     <brand>Apple</brand>
     <model>Iphone 7</model>
@@ -9,7 +8,6 @@
     <description />
   </product>
   <product>
-    <id>2</id>
     <categoryid>1</categoryid>
     <brand>Samsung</brand>
     <model>S9</model>
@@ -17,7 +15,6 @@
     <description></description>
   </product>
   <product>
-    <id>3</id>
     <categoryid>2</categoryid>
     <brand>Canon</brand>
     <model>EOS</model>
@@ -25,31 +22,34 @@
     <description></description>
   </product>
   <product>
-    <id>6</id>
-    <categoryid>1</categoryid>
-    <brand>Huawei</brand>
-    <model>P7</model>
-    <price>800</price>
-    <description>Something</description>
+    <categoryid>2</categoryid>
+    <brand>newbrand</brand>
+    <model>newmodel</model>
+    <price>1200</price>
+    <description>sf</description>
   </product>
   <product>
-    <id>7</id>
-    <categoryid>1</categoryid>
-    <brand>Xiaomi</brand>
-    <model>P9</model>
-    <price>800</price>
-    <description>Something</description>
+    <categoryid>2</categoryid>
+    <brand>BLA</brand>
+    <model>E 400</model>
+    <price>3</price>
+    <description>sf</description>
   </product>
   <product>
-    <id>8</id>
-    <categoryid>1</categoryid>
-    <brand>Apple</brand>
-    <model>IPhone S</model>
-    <price>1000</price>
-    <description>Something</description>
+    <categoryid>2</categoryid>
+    <brand>test</brand>
+    <model>test</model>
+    <price>6</price>
+    <description>Top</description>
   </product>
   <product>
-    <id>12</id>
+    <categoryid>2</categoryid>
+    <brand>OLOLOL</brand>
+    <model>OLOLLO</model>
+    <price>200</price>
+    <description>Top</description>
+  </product>
+  <product>
     <categoryid>1</categoryid>
     <brand>Samsung</brand>
     <model>A9</model>
@@ -57,7 +57,6 @@
     <description>Something</description>
   </product>
   <product>
-    <id>13</id>
     <categoryid>1</categoryid>
     <brand>Samsung</brand>
     <model>A10</model>
@@ -65,7 +64,6 @@
     <description>Something</description>
   </product>
   <product>
-    <id>14</id>
     <categoryid>1</categoryid>
     <brand>Nokia</brand>
     <model>LUMIA</model>
@@ -73,19 +71,122 @@
     <description>Something</description>
   </product>
   <product>
-    <id>50</id>
     <categoryid>1</categoryid>
-    <brand>Xiaomi</brand>
-    <model>S2</model>
+    <brand>Samsung</brand>
+    <model>A9</model>
+    <price>800</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <categoryid>1</categoryid>
+    <brand>Samsung</brand>
+    <model>A10</model>
+    <price>800</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <categoryid>1</categoryid>
+    <brand>Nokia</brand>
+    <model>LUMIA</model>
     <price>1000</price>
     <description>Something</description>
   </product>
   <product>
-    <id>1004</id>
+    <categoryid>1</categoryid>
+    <brand>Samsung</brand>
+    <model>A9</model>
+    <price>800</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <categoryid>1</categoryid>
+    <brand>Samsung</brand>
+    <model>A10</model>
+    <price>800</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <categoryid>1</categoryid>
+    <brand>Nokia</brand>
+    <model>LUMIA</model>
+    <price>1000</price>
+    <description>Something</description>
+  </product>
+  <product>
     <categoryid>2</categoryid>
-    <brand>nixon</brand>
-    <model>E 400</model>
-    <price>1200</price>
-    <description />
+    <brand>create</brand>
+    <model>create</model>
+    <price>400</price>
+    <description>sf</description>
+  </product>
+  <product>
+    <categoryid>1</categoryid>
+    <brand>Samsung</brand>
+    <model>A9</model>
+    <price>800</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <categoryid>1</categoryid>
+    <brand>Samsung</brand>
+    <model>A10</model>
+    <price>800</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <categoryid>1</categoryid>
+    <brand>Nokia</brand>
+    <model>LUMIA</model>
+    <price>1000</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <categoryid>1</categoryid>
+    <brand>XML</brand>
+    <model>A9</model>
+    <price>800</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <categoryid>1</categoryid>
+    <brand>XML</brand>
+    <model>A10</model>
+    <price>800</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <categoryid>1</categoryid>
+    <brand>XML</brand>
+    <model>LUMIA</model>
+    <price>1000</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <categoryid>1</categoryid>
+    <brand>XMLlast</brand>
+    <model>A9</model>
+    <price>800</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <categoryid>1</categoryid>
+    <brand>XMLlast</brand>
+    <model>A10</model>
+    <price>800</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <categoryid>1</categoryid>
+    <brand>XMLlast</brand>
+    <model>LUMIA</model>
+    <price>1000</price>
+    <description>Something</description>
+  </product>
+  <product>
+    <categoryid>1</categoryid>
+    <brand>BESTBRAND</brand>
+    <model>A9</model>
+    <price>800</price>
+    <description>Something</description>
   </product>
 </products>

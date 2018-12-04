@@ -92,7 +92,8 @@ namespace lab_5.Pages.Products
 		{
 			try
 			{
-				var file = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/xmls", Upload.FileName);
+				var file = Path.GetTempFileName();
+				//var file = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/xmls", Upload.FileName);
 				using (var fileStream = new FileStream(file, FileMode.Create))
 				{
 					await Upload.CopyToAsync(fileStream);
@@ -120,7 +121,6 @@ namespace lab_5.Pages.Products
 				var xElement = new XElement("products",
 					from p in productList
 					select new XElement("product",
-						new XElement("id", p.ProductID),
 						new XElement("categoryid", p.CategoryID),
 						new XElement("brand", p.Brand),
 						new XElement("model", p.Model),
@@ -129,14 +129,17 @@ namespace lab_5.Pages.Products
 					));
 				var contentRoot = _env.ContentRootPath;
 				string pathToDataFile = contentRoot + "\\Data\\Products.xml";
-				xElement.Save(pathToDataFile);
+				using (var stream = new FileStream(pathToDataFile, FileMode.Create))
+				{
+					xElement.Save(stream);
+				}
 
 				_httpContextAccessor.HttpContext.Response.Headers.Add("Content-Disposition", "attachment; filename=Products.xml");
 				_httpContextAccessor.HttpContext.Response.ContentType = "application/xml";
 				var objFile = new FileInfo(pathToDataFile);
-				var stream = objFile.OpenRead();
-				var objBytes = new byte[stream.Length];
-				stream.Read(objBytes, 0, (int)objFile.Length);
+				var newStream = objFile.OpenRead();
+				var objBytes = new byte[newStream.Length];
+				newStream.Read(objBytes, 0, (int)objFile.Length);
 				await _httpContextAccessor.HttpContext.Response.Body.WriteAsync(objBytes);
 
 			}
@@ -154,7 +157,6 @@ namespace lab_5.Pages.Products
 			List<Product> products = xDocument.Descendants("product").Select(p =>
 				new Product()
 				{
-					ProductID = Convert.ToInt32(p.Element("id").Value),
 					CategoryID = Convert.ToInt32(p.Element("categoryid").Value),
 					Model = p.Element("model").Value,
 					Brand = p.Element("brand").Value,
@@ -163,24 +165,9 @@ namespace lab_5.Pages.Products
 				}).ToList();
 			foreach (var product in products)
 			{
-				var newProduct = _context.Product.SingleOrDefault(p => p.ProductID.Equals(product.ProductID));
-				if (newProduct != null)
-				{
-					newProduct.Brand = product.Brand;
-					newProduct.CategoryID = product.CategoryID;
-					newProduct.Description = product.Description;
-					newProduct.Model = product.Model;
-					newProduct.Price = product.Price;
-					_context.Product.Add(newProduct);
-				}
-				else
-				{
-					_context.Product.Add(product);
-				}			
+				_context.Product.Add(product);						
 				_context.SaveChanges();
 			}
-
-
 		}
 
 	}
