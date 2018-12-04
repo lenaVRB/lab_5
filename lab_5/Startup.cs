@@ -42,6 +42,13 @@ namespace lab_5
 			services.AddDefaultIdentity<IdentityUser>()
 			  .AddEntityFrameworkStores<UserContext>()
 			 .AddDefaultTokenProviders();
+			services.Configure<IdentityOptions>(options =>
+			{
+				// User settings.
+				options.User.AllowedUserNameCharacters =
+				"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789абвгдеёжзийклмнопрстуфхцчшщэюяъьАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЭЮЯЪЬ-._@+";
+				options.User.RequireUniqueEmail = false;
+			});
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
 				.AddRazorPagesOptions(options =>
